@@ -15,44 +15,64 @@ The goal is to have the highest value but not exceeding 21
 
 #include <iostream>
 #include <string>
+#include <vector>
 
-void print(std::string text){
-    std::cout << text << "\n";
+using std::cout;
+using std::string;
+using std::vector;
+
+
+void print(string text){
+    cout << text << "\n";
 }
 
-struct Card{
-    std::string name_of_card;
-    std::string name_of_court;
+class Card{
+public:
+    string name_of_card;
+    string name_of_court;
     int value;
 
-    Card(){
-
+    Card(string name, string court, int val){
+        this->name_of_card = name;
+        this->name_of_court = court;
+        this->value = val;
     }
-
 };
 
-struct Deck{
-    Deck(){
-        int deck_id;
-        Card deck_elements_array[52];
+class Deck{
+public:
+    vector<Card*> cards_in_deck;
+    int deck_id;
+    Deck(int id){
+        this->deck_id = id;
+
         // loop over four courts
         // 0 - spades, 1 - hearts, 2 - diamonds, 3 - clubs
         int count = 0;
+        string name_of_court;
+        string name_of_card;
+        int val;
         for(int i = 0; i < 4;i++) {
+ 
             if (i == 0){
-                deck_elements_array[count].name_of_court = "spades";
+               name_of_court = "spades";
             }
             if (i == 1){
-                deck_elements_array[count].name_of_court = "hearts";
+                name_of_court = "hearts";
             }
             if (i == 2){
-                deck_elements_array[count].name_of_court = "diamonds";
+                name_of_court = "diamonds";
             }
             if (i == 3){
-                deck_elements_array[count].name_of_court = "clubs";
+                name_of_court = "clubs";
             }
+
             for(int j = 0; j < 13; j++){
 
+
+
+                Card *card = new Card("a", name_of_court, 1);
+                cards_in_deck.push_back(card);  
                 count++;
             }
         }
@@ -60,16 +80,16 @@ struct Deck{
 
 };
 
-struct MultipleDecks{
+class MultipleDecks{
 
 };
 
 class Player{
+    /*
     public:
         int points;
+        vector<Card> cards_on_hand;
         Player(){
-            Card cards_on_hand[5];
-            int points;
         }
         void calculatePoints(Card cards_on_hand[]){
             int cards_count = sizeof(cards_on_hand) / sizeof(Card);
@@ -80,6 +100,7 @@ class Player{
             }
              points = tempPoints;
         }
+        */
 };
 
 class Dealer{
@@ -92,6 +113,8 @@ class TheGame{
 
 
 int main() {
-    print("haha");
+    Deck deck1(1);
+    cout << deck1.deck_id << "\n";
+    cout << deck1.cards_in_deck[0] << "\n";
     return 0;
 }
